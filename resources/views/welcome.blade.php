@@ -162,15 +162,6 @@
     </header>
 
     <section class="content">
-        <p>
-            Thank you for visiting our home page. We're glad to have you here.
-        </p>
-        <p>
-            Feel free to explore .
-        </p>
-    </section>
-
-    <section class="content">
 
         @if(auth()->check())
             @if(auth()->user()->type === 'admin')
@@ -214,6 +205,15 @@
             @endif
         @endif
 
+    </section>
+
+    <section class="content">
+        <p>
+            Thank you for visiting our home page. We're glad to have you here.
+        </p>
+        <p>
+            Feel free to explore .
+        </p>
     </section>
 
     <footer>
