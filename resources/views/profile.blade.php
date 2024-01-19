@@ -1,5 +1,9 @@
 @extends('layouts.app')
 <style>
+
+    button{
+        color:black;
+    }
     .container {
         max-width: 800px;
         margin: 0 auto;
@@ -70,57 +74,32 @@
         border-color: #61dafb; /* Light blue border color on focus */
     }
 </style>
-
 @section('content')
-    <div class="container">
-        <h1>Update Profile Information</h1>
-
-        <x-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('user-profile-information.update') }}" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-
-            <!-- Name -->
-            <div class="mt-4">
-                <x-label for="name" :value="__('Name')" />
-
-                <x-input id="name" class="styled-input" type="text" name="name" :value="old('name', auth()->user()->name)" required autofocus />
-            </div>
-
-            <!-- Email -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="styled-input" type="email" name="email" :value="old('email', auth()->user()->email)" required />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="styled-input" type="password" name="password" autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="styled-input" type="password" name="password_confirmation" autocomplete="new-password" />
-            </div>
-
-            <!-- Update Profile Photo
-            <div class="mt-4">
-                <x-label for="photo" :value="__('Profile Photo')" />
-
-                <x-input id="photo" class="styled-input" type="file" name="photo" />
-            </div> -->
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Update Profile') }}
-                </x-button>
-            </div>
-        </form>
+    <!-- Buttons to switch between forms -->
+    <div>
+        <button onclick="showUpdateProfileForm()" style="color: black;">Update Profile Information</button><br>
+        <button onclick="showUpdatePasswordForm()" style="color: black;" >Update Password</button>
     </div>
+
+    <!-- Livewire components for updating profile information and password -->
+    <div id="updateProfileForm" style="display: none;">
+        @livewire('profile.update-profile-information-form')
+    </div>
+
+    <div id="updatePasswordForm" style="display: none;">
+        @livewire('profile.update-password-form')
+    </div>
+
+    <script>
+        function showUpdateProfileForm() {
+            document.getElementById('updatePasswordForm').style.display = 'none';
+            document.getElementById('updateProfileForm').style.display = 'block';
+        }
+
+        function showUpdatePasswordForm() {
+            document.getElementById('updateProfileForm').style.display = 'none';
+            document.getElementById('updatePasswordForm').style.display = 'block';
+        }
+    </script>
 @endsection
+
